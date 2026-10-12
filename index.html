@@ -1,1055 +1,989 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>FinnPro_03YTHistory</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        :root {
-            color-scheme: dark;
-            --background: #0f0f0f;
-            --surface: #181818;
-            --text: #f1f1f1;
-            --secondary: #aaaaaa;
-            --accent: #ff3030;
-            --border: #303030;
-        }
-
-        body {
-            margin: 0;
-            background: var(--background);
-            color: var(--text);
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        a {
-            color: inherit;
-        }
-
-        button, input {
-            font: inherit;
-        }
-
-        /* TOP BAR */
-
-        .topbar {
-            min-height: 60px;
-            padding: 0 28px;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            border-bottom: 1px solid #252525;
-        }
-
-        .logo-icon {
-            width: 34px;
-            height: 24px;
-            border-radius: 7px;
-            background: #ff3030;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 15px;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .site-name {
-            font-size: 18px;
-            font-weight: bold;
-            letter-spacing: -0.5px;
-        }
-
-        .site-name span {
-            color: var(--accent);
-        }
-
-        .topbar-label {
-            margin-left: auto;
-            color: var(--secondary);
-            font-size: 12px;
-        }
-
-        /* CHANNEL HEADER */
-
-        .channel {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 28px 24px 0;
-        }
-
-        .channel-info {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            padding-bottom: 25px;
-        }
-
-        .avatar {
-            width: 128px;
-            height: 128px;
-            border-radius: 50%;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-
-        .channel-details {
-            min-width: 0;
-        }
-
-        .channel-details h1 {
-            font-size: 32px;
-            letter-spacing: -0.8px;
-            margin: 0 0 10px;
-        }
-
-        .handle {
-            color: var(--secondary);
-            font-size: 14px;
-            margin: 0 0 9px;
-        }
-
-        .channel-description {
-            color: var(--secondary);
-            font-size: 13px;
-            margin: 0 0 14px;
-        }
-
-        .channel-link {
-            color: #8ab4f8;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .channel-link:hover {
-            text-decoration: underline;
-        }
-
-        /* CHANNEL TABS */
-
-        .channel-tabs {
-            display: flex;
-            gap: 30px;
-            border-bottom: 1px solid var(--border);
-            overflow-x: auto;
-            scrollbar-width: none;
-        }
-
-        .channel-tabs::-webkit-scrollbar {
-            display: none;
-        }
-
-        .tab {
-            flex-shrink: 0;
-            padding: 16px 2px 14px;
-            text-decoration: none;
-            color: var(--secondary);
-            font-size: 14px;
-            border-bottom: 3px solid transparent;
-        }
-
-        .tab.active {
-            color: white;
-            font-weight: bold;
-            border-bottom-color: white;
-        }
-
-        /* TIME TRAVEL */
-
-        .time-travel {
-            max-width: 1232px;
-            margin: 25px auto 0;
-            padding: 20px;
-            background: #191919;
-            border: 1px solid #333333;
-            border-radius: 14px;
-        }
-
-        .time-travel-heading {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 9px;
-        }
-
-        .time-icon {
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #382020;
-            border-radius: 11px;
-            color: #ff7777;
-            font-size: 23px;
-            flex-shrink: 0;
-        }
-
-        .time-travel h2 {
-            font-size: 19px;
-            margin: 0 0 4px;
-        }
-
-        .time-travel-description {
-            font-size: 13px;
-            color: #aaaaaa;
-            margin: 0 0 17px;
-            line-height: 1.5;
-        }
-
-        .date-controls {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .date-controls input {
-            min-width: 0;
-            padding: 11px 12px;
-            color: white;
-            background: #252525;
-            border: 1px solid #484848;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        .date-controls input:focus {
-            border-color: #ff5555;
-        }
-
-        .action-button {
-            padding: 11px 16px;
-            border: none;
-            border-radius: 8px;
-            background: #ff3030;
-            color: white;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .action-button:hover {
-            background: #e52222;
-        }
-
-        .reset-button {
-            background: #303030;
-        }
-
-        .reset-button:hover {
-            background: #414141;
-        }
-
-        .time-travel-status {
-            margin: 15px 0 0;
-            color: #aaaaaa;
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .time-travel-status strong {
-            color: #ff9999;
-        }
-
-        /* VIDEO ARCHIVE */
-
-        .archive {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 25px 24px 60px;
-        }
-
-        .archive-heading {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 23px;
-        }
-
-        .archive-heading h2 {
-            margin: 0;
-            font-size: 21px;
-        }
-
-        .archive-count {
-            color: var(--secondary);
-            font-size: 12px;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 34px 16px;
-        }
-
-        /* VIDEO CARDS */
-
-        .video-card {
-            min-width: 0;
-        }
-
-        .thumbnail-link {
-            display: block;
-            position: relative;
-            overflow: hidden;
-            border-radius: 11px;
-            background: #272727;
-            aspect-ratio: 16 / 9;
-        }
-
-        a.thumbnail-link img {
-            transition: transform 0.2s, opacity 0.2s;
-        }
-
-        a.thumbnail-link:hover img {
-            transform: scale(1.04);
-            opacity: 0.85;
-        }
-
-        .thumbnail-link img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .private-thumbnail {
-            cursor: default;
-        }
-
-        .thumbnail-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 12px;
-            color: var(--secondary);
-            font-size: 13px;
-            text-align: center;
-        }
-
-        .video-info {
-            padding-top: 12px;
-        }
-
-        .video-title {
-            margin: 0 0 13px;
-            font-size: 15px;
-            font-weight: 600;
-            line-height: 1.45;
-            overflow-wrap: anywhere;
-        }
-
-        .video-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 9px;
-        }
-
-        .meta-row {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .meta-label {
-            color: #888888;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.7px;
-        }
-
-        .meta-value {
-            color: #cccccc;
-            font-size: 12px;
-            line-height: 1.4;
-        }
-
-        .visibility {
-            width: fit-content;
-            display: inline-block;
-            padding: 4px 7px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: bold;
-        }
-
-        .visibility.public {
-            color: #8ee6a9;
-            background: #173c27;
-        }
-
-        .visibility.unlisted {
-            color: #ffd27a;
-            background: #493819;
-        }
-
-        .visibility.private {
-            color: #ff9292;
-            background: #492020;
-        }
-
-        .empty-message {
-            grid-column: 1 / -1;
-            padding: 45px 20px;
-            text-align: center;
-            color: #aaaaaa;
-            background: #181818;
-            border-radius: 12px;
-            line-height: 1.7;
-        }
-
-        .empty-message strong {
-            color: white;
-            display: block;
-            font-size: 18px;
-            margin-bottom: 7px;
-        }
-
-        footer {
-            border-top: 1px solid #222222;
-            padding: 23px;
-            text-align: center;
-            color: #777777;
-            font-size: 12px;
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 1000px) {
-            .video-grid {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
-
-            .time-travel {
-                margin-left: 16px;
-                margin-right: 16px;
-            }
-        }
-
-        @media (max-width: 650px) {
-            .topbar {
-                padding: 0 16px;
-            }
-
-            .topbar-label {
-                display: none;
-            }
-
-            .site-name {
-                font-size: 16px;
-            }
-
-            .channel {
-                padding: 22px 16px 0;
-            }
-
-            .channel-info {
-                gap: 17px;
-                align-items: flex-start;
-            }
-
-            .avatar {
-                width: 90px;
-                height: 90px;
-            }
-
-            .channel-details h1 {
-                font-size: 25px;
-            }
-
-            .channel-tabs {
-                gap: 24px;
-            }
-
-            .time-travel {
-                margin: 18px 12px 0;
-                padding: 16px;
-            }
-
-            .date-controls {
-                align-items: stretch;
-            }
-
-            .date-controls input {
-                width: 100%;
-            }
-
-            .date-controls button {
-                flex: 1;
-            }
-
-            .archive {
-                padding: 22px 12px 45px;
-            }
-
-            .video-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 28px 12px;
-            }
-
-            .video-info {
-                padding-top: 9px;
-            }
-
-            .video-title {
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .channel-info {
-                flex-direction: column;
-                gap: 14px;
-            }
-
-            .avatar {
-                width: 82px;
-                height: 82px;
-            }
-
-            .video-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f0f0f">
+  <title>FinnPro_03YTHistory</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      color-scheme: dark;
+      --background: #0f0f0f;
+      --surface: #181818;
+      --surface-hover: #272727;
+      --text: #f1f1f1;
+      --muted: #aaa;
+      --red: #ff3333;
+      --border: #303030;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .topbar {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 5%;
+      border-bottom: 1px solid var(--border);
+      background: #101010;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .brand-icon {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 25px;
+      border-radius: 7px;
+      background: #ff0033;
+      font-size: 15px;
+    }
+
+    .archive-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    .channel {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 35px 0 25px;
+    }
+
+    .profile-picture {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #272727;
+      flex-shrink: 0;
+    }
+
+    .channel-info h1 {
+      margin: 0 0 9px;
+      font-size: 32px;
+    }
+
+    .handle {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .subscriber-count {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #ddd;
+    }
+
+    .channel-description {
+      margin-top: 12px;
+      font-size: 13px;
+    }
+
+    .channel-description a {
+      color: #8ab4f8;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 30px;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border);
+      scrollbar-width: none;
+    }
+
+    .tab {
+      padding: 17px 2px 14px;
+      color: var(--muted);
+      background: transparent;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      font-size: 14px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .tab:hover {
+      color: white;
+    }
+
+    .tab.active {
+      color: white;
+      border-bottom-color: white;
+    }
+
+    main {
+      padding: 28px 0 60px;
+      min-height: 420px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 23px;
+    }
+
+    .video-count {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px 18px;
+    }
+
+    .video-card {
+      min-width: 0;
+    }
+
+    .thumbnail-link,
+    .thumbnail-static {
+      display: block;
+      overflow: hidden;
+      background: #242424;
+      border-radius: 12px;
+      aspect-ratio: 16 / 9;
+      position: relative;
+    }
+
+    .thumbnail-link img,
+    .thumbnail-static img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.2s ease;
+    }
+
+    .thumbnail-link:hover img {
+      transform: scale(1.04);
+    }
+
+    .short-thumbnail {
+      aspect-ratio: 9 / 16;
+      width: 100%;
+      max-height: 360px;
+      margin: 0 auto;
+    }
+
+    .short-thumbnail img {
+      object-fit: cover;
+    }
+
+    .thumbnail-fallback {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100%;
+      color: #aaa;
+      font-size: 13px;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .video-details {
+      display: flex;
+      gap: 11px;
+      padding-top: 12px;
+    }
+
+    .video-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #292929;
+      flex-shrink: 0;
+    }
+
+    .video-text {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .video-title {
+      margin: 0 0 9px;
+      font-size: 15px;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .video-meta {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .visibility {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: bold;
+    }
+
+    .visibility.public {
+      color: #86d993;
+    }
+
+    .visibility.private {
+      color: #ffadad;
+    }
+
+    .visibility::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .type-badge {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #292929;
+      color: #ddd;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .empty-state {
+      padding: 60px 20px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .empty-state h3 {
+      color: white;
+      margin-top: 0;
+    }
+
+    .time-travel-panel {
+      margin-bottom: 28px;
+      padding: 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .time-travel-panel h2 {
+      margin: 0 0 8px;
+      font-size: 23px;
+    }
+
+    .time-travel-panel p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .date-controls {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .date-controls input {
+      min-width: 0;
+      padding: 11px 12px;
+      color: white;
+      background: #0f0f0f;
+      border: 1px solid #454545;
+      border-radius: 8px;
+    }
+
+    .primary-button,
+    .secondary-button {
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 15px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .primary-button {
+      color: white;
+      background: #ff0033;
+    }
+
+    .primary-button:hover {
+      background: #d9002b;
+    }
+
+    .secondary-button {
+      color: white;
+      background: #303030;
+    }
+
+    .secondary-button:hover {
+      background: #414141;
+    }
+
+    .travel-status {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #222;
+      color: #ddd;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .travel-status strong {
+      color: white;
+    }
+
+    .footer {
+      padding: 25px 0;
+      border-top: 1px solid var(--border);
+      color: #777;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 800px) {
+      .video-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 25px 14px;
+      }
+
+      .container {
+        width: 94%;
+      }
+
+      .channel {
+        gap: 17px;
+      }
+
+      .profile-picture {
+        width: 90px;
+        height: 90px;
+      }
+
+      .channel-info h1 {
+        font-size: 27px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .topbar {
+        height: 56px;
+        padding: 0 4%;
+      }
+
+      .brand {
+        font-size: 15px;
+      }
+
+      .brand-icon {
+        width: 29px;
+        height: 22px;
+        font-size: 12px;
+      }
+
+      .archive-label {
+        font-size: 10px;
+        letter-spacing: 1px;
+      }
+
+      .channel {
+        align-items: flex-start;
+        gap: 14px;
+        padding: 25px 0 20px;
+      }
+
+      .profile-picture {
+        width: 72px;
+        height: 72px;
+      }
+
+      .channel-info h1 {
+        font-size: 23px;
+        margin-bottom: 6px;
+      }
+
+      .handle,
+      .subscriber-count,
+      .channel-description {
+        font-size: 12px;
+      }
+
+      .tabs {
+        gap: 23px;
+      }
+
+      .tab {
+        font-size: 13px;
+      }
+
+      main {
+        padding-top: 23px;
+      }
+
+      .section-heading h2 {
+        font-size: 20px;
+      }
+
+      .video-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 23px 12px;
+      }
+
+      .thumbnail-link,
+      .thumbnail-static {
+        border-radius: 8px;
+      }
+
+      .video-details {
+        gap: 8px;
+        padding-top: 9px;
+      }
+
+      .video-icon {
+        width: 29px;
+        height: 29px;
+      }
+
+      .video-title {
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .video-meta {
+        font-size: 11px;
+        line-height: 1.8;
+      }
+
+      .type-badge {
+        margin-left: 0;
+        margin-top: 4px;
+      }
+
+      .time-travel-panel {
+        padding: 17px;
+      }
+
+      .date-controls {
+        align-items: stretch;
+      }
+
+      .date-controls input {
+        width: 100%;
+      }
+
+      .date-controls button {
+        flex: 1;
+      }
+    }
+
+    @media (max-width: 350px) {
+      .archive-label {
+        display: none;
+      }
+
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .channel-info h1 {
+        font-size: 21px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="FinnPro_03YTHistory home">
+      <span class="brand-icon">▶</span>
+      <span>FinnPro_03YTHistory</span>
+    </a>
+    <span class="archive-label">EST. 2023</span>
+  </header>
 
-    <!-- WEBSITE HEADER -->
-
-    <header class="topbar">
-        <div class="logo-icon">▶</div>
-
-        <div class="site-name">
-            FinnPro_03<span>YTHistory</span>
-        </div>
-
-        <div class="topbar-label">
-            EST. 2023
-        </div>
-    </header>
-
-    <!-- YOUTUBE-STYLE CHANNEL PAGE -->
-
+  <div class="container">
     <section class="channel">
+      <img
+        class="profile-picture"
+        src="FinnPro03.jpg"
+        alt="FinnPro_03 channel profile picture"
+        onerror="this.style.visibility='hidden'"
+      >
 
-        <div class="channel-info">
-
-            <img
-                src="FinnPro03.jpg"
-                alt="Finn's profile picture"
-                class="avatar"
-            >
-
-            <div class="channel-details">
-                <h1>Finn</h1>
-
-                <p class="handle">@FinnPro_03</p>
-
-                <p class="channel-description">
-                    1.24K subscribers
-                </p>
-
-                <a
-                    class="channel-link"
-                    href="https://youtube.com/@FinnPro_03/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Check out FinnPro_03 ↗
-                </a>
-            </div>
-
+      <div class="channel-info">
+        <h1>Finn</h1>
+        <div class="handle">@FinnPro_03</div>
+        <div class="subscriber-count">1.24K subscribers</div>
+        <div class="channel-description">
+          <a href="https://youtube.com/@FinnPro_03/" target="_blank" rel="noopener noreferrer">
+            Check out FinnPro_03 ↗
+          </a>
         </div>
-
-        <nav class="channel-tabs">
-            <a href="#videos" class="tab">Home</a>
-            <a href="#videos" class="tab active">Videos</a>
-            <a href="#videos" class="tab">Shorts</a>
-            <a href="#time-travel" class="tab">Time Travel</a>
-        </nav>
-
+      </div>
     </section>
 
-    <!-- TIME TRAVEL CONTROLS -->
+    <nav class="tabs" aria-label="Archive navigation">
+      <button class="tab active" data-tab="home">Home</button>
+      <button class="tab" data-tab="videos">Videos</button>
+      <button class="tab" data-tab="shorts">Shorts</button>
+      <button class="tab" data-tab="time-travel">Time Travel</button>
+    </nav>
 
-    <section class="time-travel" id="time-travel">
-
-        <div class="time-travel-heading">
-            <div class="time-icon">◷</div>
-
-            <div>
-                <h2>Time Travel</h2>
-                <span class="meta-value">
-                    Revisit your channel's past
-                </span>
-            </div>
-        </div>
-
-        <p class="time-travel-description">
-            Pick a date to see which archived videos had been uploaded
-            and their recorded visibility at that time.
+    <main>
+      <section id="time-travel-panel" class="time-travel-panel hidden">
+        <h2>⏳ Time Travel</h2>
+        <p>
+          Travel back to a date and see which videos had been uploaded
+          and whether they were public or private at that time.
         </p>
 
         <div class="date-controls">
-
-            <input
-                type="date"
-                id="travel-date"
-                aria-label="Choose a date for Time Travel"
-                min="2023-12-19"
-            >
-
-            <button
-                type="button"
-                class="action-button"
-                id="travel-button"
-            >
-                Travel to Date
-            </button>
-
-            <button
-                type="button"
-                class="action-button reset-button"
-                id="present-button"
-            >
-                Return to Present
-            </button>
-
+          <input
+            id="travel-date"
+            type="date"
+            min="2023-12-19"
+            max="2026-10-12"
+            value="2026-10-12"
+            aria-label="Choose a date"
+          >
+          <button id="travel-button" class="primary-button">
+            Travel to Date
+          </button>
+          <button id="present-button" class="secondary-button">
+            Return to Present
+          </button>
         </div>
 
-        <p class="time-travel-status" id="travel-status" aria-live="polite">
-            <strong>Present Day:</strong>
-            Showing the current archive, newest to oldest.
-        </p>
-
-    </section>
-
-    <!-- VIDEO ARCHIVE -->
-
-    <main class="archive" id="videos">
-
-        <div class="archive-heading">
-            <h2 id="archive-title">Videos</h2>
-            <span class="archive-count" id="archive-count">
-                2 videos archived
-            </span>
+        <div id="travel-status" class="travel-status" aria-live="polite">
+          <strong>Present day:</strong> Showing the current archive.
         </div>
+      </section>
 
-        <div class="video-grid" id="video-grid">
+      <div class="section-heading">
+        <h2 id="section-title">Videos</h2>
+        <span id="video-count" class="video-count">3 videos</span>
+      </div>
 
-            <!-- VIDEO: THEORY OF EVERYTHING 2 -->
+      <div id="video-grid" class="video-grid">
 
-            <article
-                class="video-card"
-                data-number="Unknown"
-                data-type="Video"
-                data-uploaded="2026-10-06"
-                data-current-visibility="Public"
-                data-privated-date=""
+        <!-- VIDEO 1: THEORY OF EVERYTHING 2 -->
+        <article
+          class="video-card"
+          data-title="THEORY OF EVERYTHING 2 100% // NEW HARDEST"
+          data-number="Unknown"
+          data-type="Video"
+          data-visibility="Public"
+          data-uploaded="2026-10-06"
+          data-video-url="https://www.youtube.com/watch?v=4MbA3c42-fg"
+          data-thumbnail="https://img.youtube.com/vi/4MbA3c42-fg/hqdefault.jpg"
+        >
+          <a
+            class="thumbnail-link"
+            href="https://www.youtube.com/watch?v=4MbA3c42-fg"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Watch THEORY OF EVERYTHING 2 100% // NEW HARDEST"
+          >
+            <img
+              src="https://img.youtube.com/vi/4MbA3c42-fg/hqdefault.jpg"
+              alt="THEORY OF EVERYTHING 2 100% // NEW HARDEST thumbnail"
+              loading="lazy"
+              onerror="this.parentElement.innerHTML='<div class=&quot;thumbnail-fallback&quot;>Thumbnail unavailable</div>'"
             >
+          </a>
 
-                <a
-                    class="thumbnail-link"
-                    href="https://www.youtube.com/watch?v=4MbA3c42-fg"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Watch THEORY OF EVERYTHING 2 100% NEW HARDEST"
-                >
-                    <img
-                        src="https://img.youtube.com/vi/4MbA3c42-fg/hqdefault.jpg"
-                        alt="THEORY OF EVERYTHING 2 100% // NEW HARDEST thumbnail"
-                    >
-                </a>
+          <div class="video-details">
+            <img class="video-icon" src="FinnPro03.jpg" alt="">
+            <div class="video-text">
+              <h3 class="video-title">THEORY OF EVERYTHING 2 100% // NEW HARDEST</h3>
+              <div class="video-meta">
+                <div>Number: Unknown</div>
+                <div>Visibility: <span class="visibility public">Public</span></div>
+                <div>Uploaded: October 6, 2026</div>
+                <div>Time ago: <span class="time-ago">6 days ago</span></div>
+                <span class="type-badge">Video</span>
+              </div>
+            </div>
+          </div>
+        </article>
 
-                <div class="video-info">
-
-                    <h3 class="video-title">
-                        THEORY OF EVERYTHING 2 100% // NEW HARDEST
-                    </h3>
-
-                    <div class="video-meta">
-
-                        <div class="meta-row">
-                            <span class="meta-label">Number</span>
-                            <span class="meta-value">Unknown</span>
-                        </div>
-
-                        <div class="meta-row">
-                            <span class="meta-label">Type</span>
-                            <span class="meta-value">Video</span>
-                        </div>
-
-                        <div class="meta-row">
-                            <span class="meta-label">Visibility</span>
-                            <span class="visibility public">PUBLIC</span>
-                        </div>
-
-                        <div class="meta-row">
-                            <span class="meta-label">Uploaded</span>
-                            <span
-                                class="meta-value time-ago"
-                                data-date="2026-10-06"
-                            >
-                                Loading...
-                            </span>
-                        </div>
-
-                    </div>
-                </div>
-
-            </article>
-
-            <!-- VIDEO #1: SKIBIDI TOILET 1 BUT PAPER -->
-
-            <article
-                class="video-card"
-                data-number="1"
-                data-type="Short"
-                data-uploaded="2023-12-19"
-                data-current-visibility="Private"
-                data-privated-date="2024-06-25"
+        <!-- VIDEO 2: FIGHTING ANIMATION PART 15 -->
+        <article
+          class="video-card"
+          data-title="Fighting Animation (Part 15)"
+          data-number="Unknown"
+          data-type="Short"
+          data-visibility="Public"
+          data-uploaded="2026-09-26"
+          data-video-url="https://youtube.com/shorts/QFHTBXFq-X8?si=ZVasWnr-N4kbn9y5"
+          data-thumbnail="https://img.youtube.com/vi/QFHTBXFq-X8/hqdefault.jpg"
+        >
+          <a
+            class="thumbnail-link short-thumbnail"
+            href="https://youtube.com/shorts/QFHTBXFq-X8?si=ZVasWnr-N4kbn9y5"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Watch Fighting Animation (Part 15)"
+          >
+            <img
+              src="https://img.youtube.com/vi/QFHTBXFq-X8/hqdefault.jpg"
+              alt="Fighting Animation Part 15 thumbnail"
+              loading="lazy"
+              onerror="this.parentElement.innerHTML='<div class=&quot;thumbnail-fallback&quot;>Thumbnail unavailable</div>'"
             >
+          </a>
 
-                <!-- This video is currently private, so its
-                     thumbnail is deliberately not clickable. -->
+          <div class="video-details">
+            <img class="video-icon" src="FinnPro03.jpg" alt="">
+            <div class="video-text">
+              <h3 class="video-title">Fighting Animation (Part 15)</h3>
+              <div class="video-meta">
+                <div>Number: Unknown</div>
+                <div>Visibility: <span class="visibility public">Public</span></div>
+                <div>Uploaded: September 26, 2026</div>
+                <div>Time ago: <span class="time-ago">16 days ago</span></div>
+                <span class="type-badge">Short</span>
+              </div>
+            </div>
+          </div>
+        </article>
 
-                <div class="thumbnail-link private-thumbnail">
-                    <img
-                        src="Skibidi Toilet 1 But Paper.jpg"
-                        alt="Skibidi Toilet 1 but paper thumbnail"
-                    >
-                </div>
+        <!-- VIDEO 3: SKIBIDI TOILET 1 BUT PAPER -->
+        <article
+          class="video-card"
+          data-title="Skibidi Toilet 1 but paper"
+          data-number="1"
+          data-type="Short"
+          data-visibility="Private"
+          data-uploaded="2023-12-19"
+          data-privated-date="2024-06-25"
+          data-video-url=""
+          data-thumbnail="Skibidi Toilet 1 But Paper.jpg"
+        >
+          <div class="thumbnail-static">
+            <img
+              src="Skibidi Toilet 1 But Paper.jpg"
+              alt="Skibidi Toilet 1 but paper thumbnail"
+              loading="lazy"
+              onerror="this.parentElement.innerHTML='<div class=&quot;thumbnail-fallback&quot;>Skibidi Toilet 1 but paper</div>'"
+            >
+          </div>
 
-                <div class="video-info">
+          <div class="video-details">
+            <img class="video-icon" src="FinnPro03.jpg" alt="">
+            <div class="video-text">
+              <h3 class="video-title">Skibidi Toilet 1 but paper</h3>
+              <div class="video-meta">
+                <div>Number: 1</div>
+                <div>Visibility: <span class="visibility private">Private</span></div>
+                <div>Uploaded: December 19, 2023</div>
+                <div>Time ago: <span class="time-ago">2 years ago</span></div>
+                <span class="type-badge">Short</span>
+              </div>
+            </div>
+          </div>
+        </article>
 
-                    <h3 class="video-title">
-                        Skibidi Toilet 1 but paper
-                    </h3>
+      </div>
 
-                    <div class="video-meta">
-
-                        <div class="meta-row">
-                            <span class="meta-label">Number</span>
-                            <span class="meta-value">1</span>
-                        </div>
-
-                        <div class="meta-row">
-                            <span class="meta-label">Type</span>
-                            <span class="meta-value">Short</span>
-                        </div>
-
-                        <div class="meta-row">
-                            <span class="meta-label">Visibility</span>
-                            <span class="visibility private">
-                                PRIVATE
-                            </span>
-                        </div>
-
-                        <div class="meta-row">
-                            <span class="meta-label">Uploaded</span>
-                            <span
-                                class="meta-value time-ago"
-                                data-date="2023-12-19"
-                            >
-                                Loading...
-                            </span>
-                        </div>
-
-                    </div>
-                </div>
-
-            </article>
-
-        </div>
-
+      <div id="empty-state" class="empty-state hidden">
+        <h3>No videos here yet</h3>
+        <p>No matching videos are recorded in this section for the selected date.</p>
+      </div>
     </main>
+  </div>
 
-    <footer>
-        FinnPro_03YTHistory · Preserving every era of the channel.
-    </footer>
+  <footer class="footer">
+    FinnPro_03YTHistory · A manually maintained archive of FinnPro_03
+  </footer>
 
-    <!-- TIME TRAVEL AND TIME-AGO LOGIC -->
+  <script>
+    const cards = Array.from(document.querySelectorAll(".video-card"));
+    const tabs = Array.from(document.querySelectorAll(".tab"));
 
-    <script>
-        const dateInput = document.getElementById("travel-date");
-        const travelButton = document.getElementById("travel-button");
-        const presentButton = document.getElementById("present-button");
-        const travelStatus = document.getElementById("travel-status");
-        const archiveTitle = document.getElementById("archive-title");
-        const archiveCount = document.getElementById("archive-count");
-        const videoGrid = document.getElementById("video-grid");
+    const grid = document.getElementById("video-grid");
+    const emptyState = document.getElementById("empty-state");
+    const sectionTitle = document.getElementById("section-title");
+    const videoCount = document.getElementById("video-count");
 
-        const videoCards = Array.from(
-            document.querySelectorAll(".video-card")
+    const timeTravelPanel = document.getElementById("time-travel-panel");
+    const travelDateInput = document.getElementById("travel-date");
+    const travelStatus = document.getElementById("travel-status");
+
+    const TODAY = "2026-10-12";
+    const EARLIEST_DATE = "2023-12-19";
+
+    let currentTab = "home";
+    let historicalDate = null;
+
+    function parseDate(dateString) {
+      const [year, month, day] = dateString.split("-").map(Number);
+      return new Date(year, month - 1, day);
+    }
+
+    function formatDate(dateString) {
+      return parseDate(dateString).toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+    }
+
+    function getRelativeTime(uploadDate, referenceDate) {
+      const uploaded = parseDate(uploadDate);
+      const reference = parseDate(referenceDate);
+
+      let years = reference.getFullYear() - uploaded.getFullYear();
+      let months = reference.getMonth() - uploaded.getMonth();
+      let days = reference.getDate() - uploaded.getDate();
+
+      if (days < 0) {
+        months--;
+        const previousMonth = new Date(
+          reference.getFullYear(),
+          reference.getMonth(),
+          0
         );
+        days += previousMonth.getDate();
+      }
 
-        const today = new Date();
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
 
-        function formatDate(dateString) {
-            const parts = dateString.split("-");
+      if (years > 0) {
+        return years + (years === 1 ? " year ago" : " years ago");
+      }
 
-            const date = new Date(
-                Number(parts[0]),
-                Number(parts[1]) - 1,
-                Number(parts[2])
-            );
+      if (months > 0) {
+        return months + (months === 1 ? " month ago" : " months ago");
+      }
 
-            return date.toLocaleDateString("en-GB", {
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            });
+      const elapsedDays = Math.max(
+        0,
+        Math.floor((reference - uploaded) / 86400000)
+      );
+
+      if (elapsedDays === 0) return "Today";
+      if (elapsedDays === 1) return "1 day ago";
+
+      return elapsedDays + " days ago";
+    }
+
+    function getVisibility(card, date) {
+      const uploaded = card.dataset.uploaded;
+      const privateDate = card.dataset.privatedDate;
+
+      if (uploaded > date) {
+        return null;
+      }
+
+      if (privateDate && date < privateDate) {
+        return "Public";
+      }
+
+      return card.dataset.visibility;
+    }
+
+    function updateCard(card, date) {
+      const uploaded = card.dataset.uploaded;
+      const visibility = getVisibility(card, date);
+
+      if (uploaded > date || !visibility) {
+        card.classList.add("hidden");
+        return false;
+      }
+
+      card.classList.remove("hidden");
+
+      const visibilityElement = card.querySelector(".visibility");
+
+      visibilityElement.textContent = visibility;
+      visibilityElement.classList.toggle("public", visibility === "Public");
+      visibilityElement.classList.toggle("private", visibility === "Private");
+
+      const timeAgo = card.querySelector(".time-ago");
+      timeAgo.textContent = getRelativeTime(uploaded, date);
+
+      return true;
+    }
+
+    function render() {
+      const referenceDate = historicalDate || TODAY;
+      const isHistorical = historicalDate !== null;
+
+      timeTravelPanel.classList.toggle(
+        "hidden",
+        currentTab !== "time-travel"
+      );
+
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const type = card.dataset.type;
+        let shouldShow = true;
+
+        if (currentTab === "videos") {
+          shouldShow = type === "Video";
+        } else if (currentTab === "shorts") {
+          shouldShow = type === "Short";
         }
 
-        function getLocalDateString(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, "0");
-            const day = String(date.getDate()).padStart(2, "0");
-
-            return `${year}-${month}-${day}`;
+        if (!shouldShow) {
+          card.classList.add("hidden");
+          return;
         }
 
-        function getTimeAgo(uploadDateString, referenceDateString) {
-            const upload = new Date(uploadDateString + "T00:00:00");
-            const reference = new Date(referenceDateString + "T00:00:00");
-
-            if (uploadDateString === referenceDateString) {
-                return "Today";
-            }
-
-            let years =
-                reference.getFullYear() - upload.getFullYear();
-
-            let months =
-                reference.getMonth() - upload.getMonth();
-
-            let days =
-                reference.getDate() - upload.getDate();
-
-            if (days < 0) {
-                months--;
-            }
-
-            if (months < 0) {
-                years--;
-            }
-
-            if (years > 0) {
-                return years + (years === 1 ? " Year Ago" : " Years Ago");
-            }
-
-            const totalMonths =
-                (reference.getFullYear() - upload.getFullYear()) * 12 +
-                reference.getMonth() - upload.getMonth();
-
-            const elapsedMonths = days < 0
-                ? totalMonths - 1
-                : totalMonths;
-
-            if (elapsedMonths > 0) {
-                return elapsedMonths +
-                    (elapsedMonths === 1 ? " Month Ago" : " Months Ago");
-            }
-
-            const daysAgo = Math.max(
-                0,
-                Math.floor(
-                    (reference.getTime() - upload.getTime()) /
-                    (1000 * 60 * 60 * 24)
-                )
-            );
-
-            if (daysAgo === 0) {
-                return "Today";
-            }
-
-            return daysAgo +
-                (daysAgo === 1 ? " Day Ago" : " Days Ago");
+        if (updateCard(card, referenceDate)) {
+          visibleCount++;
         }
+      });
 
-        function getVisibilityAtDate(card, selectedDate) {
-            const uploaded = card.dataset.uploaded;
-            const currentVisibility = card.dataset.currentVisibility;
-            const privatedDate = card.dataset.privatedDate;
+      if (currentTab === "home") {
+        sectionTitle.textContent = isHistorical
+          ? "Videos recorded on " + formatDate(referenceDate)
+          : "Latest uploads";
+      } else if (currentTab === "videos") {
+        sectionTitle.textContent = "Videos";
+      } else if (currentTab === "shorts") {
+        sectionTitle.textContent = "Shorts";
+      } else {
+        sectionTitle.textContent = isHistorical
+          ? "Archive on " + formatDate(referenceDate)
+          : "All archived videos";
+      }
 
-            if (selectedDate < uploaded) {
-                return null;
-            }
+      videoCount.textContent =
+        visibleCount + (visibleCount === 1 ? " video" : " videos");
 
-            if (privatedDate && selectedDate >= privatedDate) {
-                return "Private";
-            }
+      emptyState.classList.toggle("hidden", visibleCount !== 0);
+      grid.classList.toggle("hidden", visibleCount === 0);
 
-            if (currentVisibility === "Private" && privatedDate) {
-                return "Public";
-            }
+      if (isHistorical) {
+        travelStatus.innerHTML =
+          "<strong>Viewing " + formatDate(referenceDate) +
+          ":</strong> Only videos uploaded by this date are shown. " +
+          "Visibility reflects the recorded status on that date.";
+      } else {
+        travelStatus.innerHTML =
+          "<strong>Present day:</strong> Showing the current archive.";
+      }
+    }
 
-            return currentVisibility;
-        }
+    function setTab(tabName) {
+      currentTab = tabName;
 
-        function updateVisibilityBadge(card, visibility) {
-            const badge = card.querySelector(".visibility");
+      tabs.forEach(tab => {
+        const active = tab.dataset.tab === tabName;
+        tab.classList.toggle("active", active);
+        tab.setAttribute("aria-pressed", String(active));
+      });
 
-            badge.textContent = visibility.toUpperCase();
-            badge.className = "visibility " + visibility.toLowerCase();
-        }
+      render();
+    }
 
-        function updateArchive(selectedDate, isTimeTravel) {
-            const availableCards = videoCards
-                .filter(card => selectedDate >= card.dataset.uploaded)
-                .sort((a, b) =>
-                    b.dataset.uploaded.localeCompare(a.dataset.uploaded)
-                );
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        setTab(tab.dataset.tab);
+      });
+    });
 
-            videoCards.forEach(card => {
-                const visibility = getVisibilityAtDate(card, selectedDate);
+    document.getElementById("travel-button").addEventListener("click", () => {
+      const chosenDate = travelDateInput.value;
 
-                card.style.display = visibility ? "" : "none";
+      if (!chosenDate) {
+        travelStatus.textContent = "Please choose a date first.";
+        return;
+      }
 
-                if (!visibility) {
-                    return;
-                }
+      if (chosenDate < EARLIEST_DATE || chosenDate > TODAY) {
+        travelStatus.textContent =
+          "Choose a date between December 19, 2023 and October 12, 2026.";
+        return;
+      }
 
-                updateVisibilityBadge(card, visibility);
+      historicalDate = chosenDate;
+      render();
+    });
 
-                const timeAgo = card.querySelector(".time-ago");
+    document.getElementById("present-button").addEventListener("click", () => {
+      historicalDate = null;
+      travelDateInput.value = TODAY;
+      render();
+    });
 
-                timeAgo.textContent = getTimeAgo(
-                    card.dataset.uploaded,
-                    selectedDate
-                );
+    travelDateInput.max = TODAY;
 
-                timeAgo.title =
-                    formatDate(card.dataset.uploaded);
+    // Keep the archive in newest-to-oldest order.
+    cards.sort((a, b) => {
+      return b.dataset.uploaded.localeCompare(a.dataset.uploaded);
+    });
 
-                // Restore newest-to-oldest order.
-                videoGrid.appendChild(card);
-            });
+    cards.forEach(card => grid.appendChild(card));
 
-            archiveCount.textContent =
-                availableCards.length +
-                (availableCards.length === 1
-                    ? " video archived"
-                    : " videos archived");
-
-            if (isTimeTravel) {
-                archiveTitle.textContent = "Videos in " +
-                    new Date(selectedDate + "T00:00:00")
-                        .toLocaleDateString("en-GB", {
-                            month: "long",
-                            year: "numeric"
-                        });
-
-                travelStatus.innerHTML =
-                    "<strong>Time Travel:</strong> Viewing " +
-                    formatDate(selectedDate) +
-                    ". Showing videos uploaded by this date and their recorded visibility.";
-            } else {
-                archiveTitle.textContent = "Videos";
-
-                travelStatus.innerHTML =
-                    "<strong>Present Day:</strong> Showing the current archive, newest to oldest.";
-            }
-
-            if (availableCards.length === 0) {
-                let emptyMessage = document.getElementById("empty-message");
-
-                if (!emptyMessage) {
-                    emptyMessage = document.createElement("div");
-                    emptyMessage.id = "empty-message";
-                    emptyMessage.className = "empty-message";
-                    videoGrid.appendChild(emptyMessage);
-                }
-
-                emptyMessage.innerHTML =
-                    "<strong>No archived videos yet!</strong>" +
-                    "Your channel history has no recorded uploads on or before this date.";
-
-                emptyMessage.style.display = "";
-            } else {
-                const emptyMessage =
-                    document.getElementById("empty-message");
-
-                if (emptyMessage) {
-                    emptyMessage.style.display = "none";
-                }
-            }
-        }
-
-        function travelToDate() {
-            const selectedDate = dateInput.value;
-            const todayString = getLocalDateString(new Date());
-
-            if (!selectedDate) {
-                travelStatus.textContent =
-                    "Please choose a date first!";
-                return;
-            }
-
-            if (selectedDate > todayString) {
-                travelStatus.textContent =
-                    "You cannot travel into the future yet!";
-                return;
-            }
-
-            if (selectedDate < "2023-12-19") {
-                travelStatus.textContent =
-                    "The archive starts on December 19, 2023.";
-                return;
-            }
-
-            updateArchive(
-                selectedDate,
-                selectedDate !== todayString
-            );
-
-            document.getElementById("videos").scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        }
-
-        function returnToPresent() {
-            const todayString = getLocalDateString(new Date());
-
-            dateInput.value = todayString;
-
-            updateArchive(todayString, false);
-        }
-
-        travelButton.addEventListener("click", travelToDate);
-        presentButton.addEventListener("click", returnToPresent);
-
-        dateInput.max = getLocalDateString(today);
-        dateInput.value = getLocalDateString(today);
-
-        // Start with the current channel archive.
-        returnToPresent();
-
-        // Refresh time-ago labels and the default date every hour.
-        setInterval(() => {
-            if (
-                dateInput.value === getLocalDateString(new Date())
-            ) {
-                returnToPresent();
-            }
-        }, 60 * 60 * 1000);
-    </script>
-
+    // Set the initial relative upload labels and archive view.
+    render();
+  </script>
 </body>
 </html>
