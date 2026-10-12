@@ -19,7 +19,7 @@
             font-family: Arial, sans-serif;
         }
 
-        /* PROFILE HEADER */
+        /* PROFILE */
 
         .profile {
             padding: 45px 20px 35px;
@@ -55,7 +55,7 @@
             text-decoration: underline;
         }
 
-        /* VIDEO ARCHIVE */
+        /* ARCHIVE */
 
         .archive {
             max-width: 1100px;
@@ -81,6 +81,8 @@
             gap: 22px;
         }
 
+        /* VIDEO CARD */
+
         .video-card {
             background: #1c1c1c;
             border: 1px solid #303030;
@@ -94,7 +96,17 @@
             border-color: #ff4545;
         }
 
-        .thumbnail {
+        .thumbnail-link {
+            display: block;
+            line-height: 0;
+        }
+
+        .thumbnail-link:hover {
+            opacity: 0.85;
+        }
+
+        .thumbnail,
+        .thumbnail-placeholder {
             width: 100%;
             aspect-ratio: 16 / 9;
             object-fit: cover;
@@ -102,53 +114,80 @@
             background: #292929;
         }
 
+        .thumbnail-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999999;
+            font-size: 14px;
+            line-height: 1.4;
+            text-align: center;
+            padding: 15px;
+        }
+
         .video-info {
             padding: 14px;
         }
 
         .video-info h3 {
-            font-size: 15px;
+            font-size: 16px;
             line-height: 1.4;
-            margin: 0 0 9px;
+            margin: 0 0 14px;
             overflow-wrap: anywhere;
         }
 
-        .video-date {
-            color: #aaaaaa;
-            font-size: 12px;
-            margin: 0 0 10px;
+        .video-details {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
         }
 
-        .video-status {
+        .detail {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .detail-label {
+            color: #888888;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            color: #dddddd;
+            font-size: 13px;
+            overflow-wrap: anywhere;
+        }
+
+        /* VISIBILITY BADGES */
+
+        .visibility {
             display: inline-block;
+            width: fit-content;
             padding: 5px 8px;
             border-radius: 5px;
-            background: #303030;
-            color: #ff7777;
             font-size: 11px;
             font-weight: bold;
         }
 
-        .video-link {
-            display: inline-block;
-            margin-top: 12px;
-            color: #ff5555;
-            text-decoration: none;
-            font-size: 12px;
+        .visibility.public {
+            background: #173c27;
+            color: #75e69c;
         }
 
-        .video-link:hover {
-            text-decoration: underline;
+        .visibility.unlisted {
+            background: #493819;
+            color: #ffce72;
         }
 
-        .empty-message {
-            color: #888888;
-            text-align: center;
-            padding: 30px 10px;
-            grid-column: 1 / -1;
+        .visibility.private {
+            background: #492020;
+            color: #ff8585;
         }
 
-        /* MOBILE LAYOUT */
+        /* MOBILE */
 
         @media (max-width: 700px) {
             .video-grid {
@@ -168,6 +207,10 @@
                 width: 105px;
                 height: 105px;
             }
+
+            .video-info {
+                padding: 11px;
+            }
         }
 
         @media (max-width: 380px) {
@@ -180,7 +223,7 @@
 
 <body>
 
-    <!-- PROFILE -->
+    <!-- PROFILE HEADER -->
 
     <header class="profile">
         <img
@@ -214,30 +257,119 @@
 
         <div class="video-grid">
 
-            <!-- VIDEO 1 -->
+            <!-- VIDEO #1 -->
 
             <article class="video-card">
-                <img
-                    class="thumbnail"
-                    src="https://placehold.co/640x360/252525/ffffff?text=Skibidi+Toilet+1+But+Paper"
-                    alt="Skibidi Toilet 1 But Paper thumbnail"
-                >
+
+                <!-- Private videos have no clickable thumbnail. -->
+                <div class="thumbnail-placeholder">
+                    <img
+                        src="Skibidi Toilet 1 But Paper.jpg"
+                        alt="Skibidi Toilet 1 but paper thumbnail"
+                        class="thumbnail"
+                    >
+                </div>
 
                 <div class="video-info">
-                    <h3>Skibidi Toilet 1 But Paper</h3>
+                    <h3>Skibidi Toilet 1 but paper</h3>
 
-                    <p class="video-date">
-                        December 19, 2023
-                    </p>
+                    <div class="video-details">
 
-                    <span class="video-status">
-                        HISTORICAL VIDEO
-                    </span>
+                        <div class="detail">
+                            <span class="detail-label">Number</span>
+                            <span class="detail-value">1</span>
+                        </div>
+
+                        <div class="detail">
+                            <span class="detail-label">Type</span>
+                            <span class="detail-value">Short</span>
+                        </div>
+
+                        <div class="detail">
+                            <span class="detail-label">Visibility</span>
+                            <span class="visibility private">
+                                PRIVATE
+                            </span>
+                        </div>
+
+                        <div class="detail">
+                            <span class="detail-label">Uploaded</span>
+                            <span
+                                class="detail-value time-ago"
+                                data-date="2023-12-19"
+                                title="19 December 2023"
+                            >
+                                Loading...
+                            </span>
+                        </div>
+
+                    </div>
                 </div>
+
             </article>
 
         </div>
     </main>
+
+    <!-- AUTOMATIC TIME-AGO SYSTEM -->
+
+    <script>
+        function updateTimeAgo() {
+            const now = new Date();
+
+            document.querySelectorAll(".time-ago").forEach(element => {
+                const uploadDate = new Date(
+                    element.dataset.date + "T00:00:00"
+                );
+
+                let years = now.getFullYear() -
+                    uploadDate.getFullYear();
+
+                let months = now.getMonth() -
+                    uploadDate.getMonth();
+
+                let days = now.getDate() -
+                    uploadDate.getDate();
+
+                if (days < 0) {
+                    months--;
+                }
+
+                if (months < 0) {
+                    years--;
+                }
+
+                if (years > 0) {
+                    element.textContent =
+                        years + (years === 1 ? " Year Ago" : " Years Ago");
+                } else if (months > 0) {
+                    element.textContent =
+                        months + (months === 1 ? " Month Ago" : " Months Ago");
+                } else {
+                    const difference = Math.max(
+                        0,
+                        Math.floor(
+                            (now.getTime() - uploadDate.getTime()) /
+                            (1000 * 60 * 60 * 24)
+                        )
+                    );
+
+                    if (difference === 0) {
+                        element.textContent = "Today";
+                    } else {
+                        element.textContent =
+                            difference +
+                            (difference === 1 ? " Day Ago" : " Days Ago");
+                    }
+                }
+            });
+        }
+
+        updateTimeAgo();
+
+        // Refresh the labels every hour.
+        setInterval(updateTimeAgo, 60 * 60 * 1000);
+    </script>
 
 </body>
 </html>
