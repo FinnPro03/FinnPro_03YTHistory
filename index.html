@@ -11,211 +11,373 @@
             box-sizing: border-box;
         }
 
+        :root {
+            color-scheme: dark;
+            --background: #0f0f0f;
+            --surface: #181818;
+            --text: #f1f1f1;
+            --secondary: #aaaaaa;
+            --accent: #ff3030;
+            --border: #303030;
+        }
+
         body {
             margin: 0;
-            min-height: 100vh;
-            background: #111111;
+            background: var(--background);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        /* TOP BAR */
+
+        .topbar {
+            height: 60px;
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            border-bottom: 1px solid #222222;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 24px;
+            border-radius: 7px;
+            background: #ff3030;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: white;
-            font-family: Arial, sans-serif;
+            font-size: 15px;
+            font-weight: bold;
         }
 
-        /* PROFILE */
-
-        .profile {
-            padding: 45px 20px 35px;
-            text-align: center;
+        .site-name {
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: -0.5px;
         }
 
-        .profile-picture {
-            width: 120px;
-            height: 120px;
+        .site-name span {
+            color: var(--accent);
+        }
+
+        .topbar-label {
+            margin-left: auto;
+            color: var(--secondary);
+            font-size: 12px;
+        }
+
+        /* CHANNEL HEADER */
+
+        .channel {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 28px 24px 0;
+        }
+
+        .channel-info {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            padding-bottom: 25px;
+        }
+
+        .avatar {
+            width: 128px;
+            height: 128px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #ff3030;
+            flex-shrink: 0;
         }
 
-        .profile h1 {
-            margin: 15px 0 8px;
-            font-size: 30px;
+        .channel-details {
+            min-width: 0;
         }
 
-        .subscribers {
-            margin: 0 0 12px;
-            color: #bdbdbd;
-            font-size: 15px;
+        .channel-details h1 {
+            font-size: 32px;
+            letter-spacing: -0.8px;
+            margin: 0 0 10px;
         }
 
-        .youtube-link {
-            color: #ff4545;
+        .handle {
+            color: var(--secondary);
+            font-size: 14px;
+            margin: 0 0 9px;
+        }
+
+        .channel-description {
+            color: var(--secondary);
             font-size: 13px;
-            text-decoration: none;
+            margin: 0 0 14px;
         }
 
-        .youtube-link:hover {
+        .channel-link {
+            color: #8ab4f8;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .channel-link:hover {
             text-decoration: underline;
         }
 
-        /* ARCHIVE */
+        /* CHANNEL NAVIGATION */
+
+        .channel-tabs {
+            display: flex;
+            gap: 30px;
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .channel-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab {
+            flex-shrink: 0;
+            padding: 16px 2px 14px;
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 14px;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            color: white;
+            font-weight: bold;
+            border-bottom-color: white;
+        }
+
+        /* ARCHIVE CONTENT */
 
         .archive {
-            max-width: 1100px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 25px 20px 60px;
-            border-top: 1px solid #303030;
+            padding: 25px 24px 60px;
         }
 
-        .archive h2 {
-            font-size: 26px;
-            margin: 0 0 8px;
+        .archive-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 23px;
         }
 
-        .archive-description {
-            color: #999999;
-            font-size: 14px;
-            margin: 0 0 28px;
+        .archive-heading h2 {
+            margin: 0;
+            font-size: 21px;
         }
+
+        .archive-count {
+            color: var(--secondary);
+            font-size: 12px;
+        }
+
+        /* VIDEO GRID */
 
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 34px 16px;
         }
-
-        /* VIDEO CARD */
 
         .video-card {
-            background: #1c1c1c;
-            border: 1px solid #303030;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .video-card:hover {
-            transform: translateY(-3px);
-            border-color: #ff4545;
+            min-width: 0;
         }
 
         .thumbnail-link {
             display: block;
-            line-height: 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 11px;
+            background: #272727;
+            aspect-ratio: 16 / 9;
         }
 
-        .thumbnail-link:hover {
-            opacity: 0.85;
+        .thumbnail-link img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.2s;
         }
 
-        .thumbnail,
+        .thumbnail-link:hover img {
+            transform: scale(1.04);
+        }
+
+        .private-thumbnail {
+            cursor: default;
+        }
+
+        .private-thumbnail:hover img {
+            transform: none;
+        }
+
         .thumbnail-placeholder {
             width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            display: block;
-            background: #292929;
-        }
-
-        .thumbnail-placeholder {
+            height: 100%;
             display: flex;
-            align-items: center;
             justify-content: center;
-            color: #999999;
-            font-size: 14px;
-            line-height: 1.4;
+            align-items: center;
+            padding: 12px;
+            color: var(--secondary);
+            font-size: 13px;
             text-align: center;
-            padding: 15px;
         }
 
         .video-info {
-            padding: 14px;
+            padding-top: 12px;
         }
 
-        .video-info h3 {
-            font-size: 16px;
-            line-height: 1.4;
-            margin: 0 0 14px;
+        .video-title {
+            margin: 0 0 12px;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.45;
             overflow-wrap: anywhere;
         }
 
-        .video-details {
+        .video-meta {
             display: flex;
             flex-direction: column;
-            gap: 9px;
+            gap: 8px;
         }
 
-        .detail {
+        .meta-row {
             display: flex;
             flex-direction: column;
             gap: 3px;
         }
 
-        .detail-label {
+        .meta-label {
             color: #888888;
-            font-size: 11px;
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.7px;
         }
 
-        .detail-value {
-            color: #dddddd;
-            font-size: 13px;
-            overflow-wrap: anywhere;
+        .meta-value {
+            color: #cccccc;
+            font-size: 12px;
+            line-height: 1.4;
         }
-
-        /* VISIBILITY BADGES */
 
         .visibility {
-            display: inline-block;
             width: fit-content;
-            padding: 5px 8px;
-            border-radius: 5px;
-            font-size: 11px;
+            display: inline-block;
+            padding: 4px 7px;
+            border-radius: 4px;
+            font-size: 10px;
             font-weight: bold;
         }
 
         .visibility.public {
+            color: #8ee6a9;
             background: #173c27;
-            color: #75e69c;
         }
 
         .visibility.unlisted {
+            color: #ffd27a;
             background: #493819;
-            color: #ffce72;
         }
 
         .visibility.private {
+            color: #ff9292;
             background: #492020;
-            color: #ff8585;
         }
 
-        /* MOBILE */
+        /* FOOTER */
 
-        @media (max-width: 700px) {
+        footer {
+            border-top: 1px solid #222222;
+            padding: 23px;
+            text-align: center;
+            color: #777777;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE LAYOUT */
+
+        @media (max-width: 1000px) {
             .video-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 12px;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 650px) {
+            .topbar {
+                padding: 0 16px;
+            }
+
+            .topbar-label {
+                display: none;
+            }
+
+            .channel {
+                padding: 22px 16px 0;
+            }
+
+            .channel-info {
+                gap: 17px;
+                align-items: flex-start;
+            }
+
+            .avatar {
+                width: 90px;
+                height: 90px;
+            }
+
+            .channel-details h1 {
+                font-size: 25px;
+            }
+
+            .channel-tabs {
+                gap: 24px;
             }
 
             .archive {
-                padding: 22px 12px 40px;
+                padding: 22px 12px 45px;
             }
 
-            .profile {
-                padding-top: 35px;
-            }
-
-            .profile-picture {
-                width: 105px;
-                height: 105px;
+            .video-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 28px 12px;
             }
 
             .video-info {
-                padding: 11px;
+                padding-top: 9px;
+            }
+
+            .video-title {
+                font-size: 14px;
             }
         }
 
         @media (max-width: 380px) {
+            .channel-info {
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .avatar {
+                width: 82px;
+                height: 82px;
+            }
+
             .video-grid {
                 grid-template-columns: 1fr;
+                gap: 24px;
             }
         }
     </style>
@@ -223,79 +385,182 @@
 
 <body>
 
-    <!-- PROFILE HEADER -->
+    <!-- WEBSITE TOP BAR -->
 
-    <header class="profile">
-        <img
-            src="FinnPro03.jpg"
-            alt="FinnPro_03 Profile Picture"
-            class="profile-picture"
-        >
+    <header class="topbar">
+        <div class="logo-icon">▶</div>
 
-        <h1>Finn</h1>
+        <div class="site-name">
+            FinnPro_03<span>YTHistory</span>
+        </div>
 
-        <p class="subscribers">1.24K Subscribers</p>
-
-        <a
-            class="youtube-link"
-            href="https://youtube.com/@FinnPro_03/"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            Check out FinnPro_03
-        </a>
+        <div class="topbar-label">
+            YOUR CHANNEL HISTORY
+        </div>
     </header>
+
+    <!-- CHANNEL PROFILE -->
+
+    <section class="channel">
+
+        <div class="channel-info">
+
+            <img
+                src="FinnPro03.jpg"
+                alt="Finn's profile picture"
+                class="avatar"
+            >
+
+            <div class="channel-details">
+
+                <h1>Finn</h1>
+
+                <p class="handle">
+                    @FinnPro_03
+                </p>
+
+                <p class="channel-description">
+                    1.24K subscribers
+                </p>
+
+                <a
+                    class="channel-link"
+                    href="https://youtube.com/@FinnPro_03/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Check out FinnPro_03 ↗
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- CHANNEL TABS -->
+
+        <nav class="channel-tabs">
+            <a href="#videos" class="tab">Home</a>
+            <a href="#videos" class="tab active">Videos</a>
+            <a href="#videos" class="tab">Shorts</a>
+            <a href="#videos" class="tab">History</a>
+        </nav>
+
+    </section>
 
     <!-- VIDEO ARCHIVE -->
 
-    <main class="archive">
-        <h2>Video Archive</h2>
+    <main class="archive" id="videos">
 
-        <p class="archive-description">
-            Every upload. Every era. The complete FinnPro_03 history.
-        </p>
+        <div class="archive-heading">
+            <h2>Videos</h2>
+
+            <span class="archive-count">
+                2 videos archived
+            </span>
+        </div>
 
         <div class="video-grid">
 
-            <!-- VIDEO #1 -->
+            <!-- VIDEO #2: NEWEST FIRST -->
 
             <article class="video-card">
 
-                <!-- Private videos have no clickable thumbnail. -->
-                <div class="thumbnail-placeholder">
+                <a
+                    class="thumbnail-link"
+                    href="https://www.youtube.com/watch?v=4MbA3c42-fg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Watch THEORY OF EVERYTHING 2 100% NEW HARDEST"
+                >
+                    <img
+                        src="https://img.youtube.com/vi/4MbA3c42-fg/hqdefault.jpg"
+                        alt="THEORY OF EVERYTHING 2 100% // NEW HARDEST thumbnail"
+                    >
+                </a>
+
+                <div class="video-info">
+
+                    <h3 class="video-title">
+                        THEORY OF EVERYTHING 2 100% // NEW HARDEST
+                    </h3>
+
+                    <div class="video-meta">
+
+                        <div class="meta-row">
+                            <span class="meta-label">Number</span>
+                            <span class="meta-value">Unknown</span>
+                        </div>
+
+                        <div class="meta-row">
+                            <span class="meta-label">Type</span>
+                            <span class="meta-value">Video</span>
+                        </div>
+
+                        <div class="meta-row">
+                            <span class="meta-label">Visibility</span>
+                            <span class="visibility public">
+                                PUBLIC
+                            </span>
+                        </div>
+
+                        <div class="meta-row">
+                            <span class="meta-label">Uploaded</span>
+                            <span
+                                class="meta-value time-ago"
+                                data-date="2026-10-06"
+                                title="6 October 2026"
+                            >
+                                Loading...
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </article>
+
+            <!-- VIDEO #1: OLDEST -->
+
+            <article class="video-card">
+
+                <!-- Private thumbnails are NOT clickable. -->
+
+                <div class="thumbnail-link private-thumbnail">
                     <img
                         src="Skibidi Toilet 1 But Paper.jpg"
                         alt="Skibidi Toilet 1 but paper thumbnail"
-                        class="thumbnail"
                     >
                 </div>
 
                 <div class="video-info">
-                    <h3>Skibidi Toilet 1 but paper</h3>
 
-                    <div class="video-details">
+                    <h3 class="video-title">
+                        Skibidi Toilet 1 but paper
+                    </h3>
 
-                        <div class="detail">
-                            <span class="detail-label">Number</span>
-                            <span class="detail-value">1</span>
+                    <div class="video-meta">
+
+                        <div class="meta-row">
+                            <span class="meta-label">Number</span>
+                            <span class="meta-value">1</span>
                         </div>
 
-                        <div class="detail">
-                            <span class="detail-label">Type</span>
-                            <span class="detail-value">Short</span>
+                        <div class="meta-row">
+                            <span class="meta-label">Type</span>
+                            <span class="meta-value">Short</span>
                         </div>
 
-                        <div class="detail">
-                            <span class="detail-label">Visibility</span>
+                        <div class="meta-row">
+                            <span class="meta-label">Visibility</span>
                             <span class="visibility private">
                                 PRIVATE
                             </span>
                         </div>
 
-                        <div class="detail">
-                            <span class="detail-label">Uploaded</span>
+                        <div class="meta-row">
+                            <span class="meta-label">Uploaded</span>
                             <span
-                                class="detail-value time-ago"
+                                class="meta-value time-ago"
                                 data-date="2023-12-19"
                                 title="19 December 2023"
                             >
@@ -311,6 +576,10 @@
         </div>
     </main>
 
+    <footer>
+        FinnPro_03YTHistory · Preserving every era of the channel.
+    </footer>
+
     <!-- AUTOMATIC TIME-AGO SYSTEM -->
 
     <script>
@@ -318,18 +587,17 @@
             const now = new Date();
 
             document.querySelectorAll(".time-ago").forEach(element => {
-                const uploadDate = new Date(
-                    element.dataset.date + "T00:00:00"
-                );
+                const parts = element.dataset.date.split("-");
 
-                let years = now.getFullYear() -
-                    uploadDate.getFullYear();
+                const year = Number(parts[0]);
+                const month = Number(parts[1]);
+                const day = Number(parts[2]);
 
-                let months = now.getMonth() -
-                    uploadDate.getMonth();
+                const uploadDate = new Date(year, month - 1, day);
 
-                let days = now.getDate() -
-                    uploadDate.getDate();
+                let years = now.getFullYear() - year;
+                let months = now.getMonth() - (month - 1);
+                let days = now.getDate() - day;
 
                 if (days < 0) {
                     months--;
@@ -342,10 +610,25 @@
                 if (years > 0) {
                     element.textContent =
                         years + (years === 1 ? " Year Ago" : " Years Ago");
-                } else if (months > 0) {
-                    element.textContent =
-                        months + (months === 1 ? " Month Ago" : " Months Ago");
                 } else {
+                    const totalMonths =
+                        (now.getFullYear() - year) * 12 +
+                        now.getMonth() - (month - 1);
+
+                    if (totalMonths > 0 && (years >= 0)) {
+                        const elapsedMonths =
+                            days < 0 ? totalMonths - 1 : totalMonths;
+
+                        if (elapsedMonths > 0) {
+                            element.textContent =
+                                elapsedMonths +
+                                (elapsedMonths === 1
+                                    ? " Month Ago"
+                                    : " Months Ago");
+                            return;
+                        }
+                    }
+
                     const difference = Math.max(
                         0,
                         Math.floor(
