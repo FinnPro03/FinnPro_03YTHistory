@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>FinnPro_03YTHistory</title>
 
     <style>
@@ -17,11 +17,13 @@
             background: #111111;
             color: white;
             font-family: Arial, sans-serif;
-            text-align: center;
         }
+
+        /* PROFILE HEADER */
 
         .profile {
             padding: 45px 20px 35px;
+            text-align: center;
         }
 
         .profile-picture {
@@ -32,7 +34,7 @@
             border: 3px solid #ff3030;
         }
 
-        h1 {
+        .profile h1 {
             margin: 15px 0 8px;
             font-size: 30px;
         }
@@ -52,10 +54,134 @@
         .youtube-link:hover {
             text-decoration: underline;
         }
+
+        /* VIDEO ARCHIVE */
+
+        .archive {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 25px 20px 60px;
+            border-top: 1px solid #303030;
+        }
+
+        .archive h2 {
+            font-size: 26px;
+            margin: 0 0 8px;
+        }
+
+        .archive-description {
+            color: #999999;
+            font-size: 14px;
+            margin: 0 0 28px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .video-card {
+            background: #1c1c1c;
+            border: 1px solid #303030;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-3px);
+            border-color: #ff4545;
+        }
+
+        .thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            background: #292929;
+        }
+
+        .video-info {
+            padding: 14px;
+        }
+
+        .video-info h3 {
+            font-size: 15px;
+            line-height: 1.4;
+            margin: 0 0 9px;
+            overflow-wrap: anywhere;
+        }
+
+        .video-date {
+            color: #aaaaaa;
+            font-size: 12px;
+            margin: 0 0 10px;
+        }
+
+        .video-status {
+            display: inline-block;
+            padding: 5px 8px;
+            border-radius: 5px;
+            background: #303030;
+            color: #ff7777;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .video-link {
+            display: inline-block;
+            margin-top: 12px;
+            color: #ff5555;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .video-link:hover {
+            text-decoration: underline;
+        }
+
+        .empty-message {
+            color: #888888;
+            text-align: center;
+            padding: 30px 10px;
+            grid-column: 1 / -1;
+        }
+
+        /* MOBILE LAYOUT */
+
+        @media (max-width: 700px) {
+            .video-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .archive {
+                padding: 22px 12px 40px;
+            }
+
+            .profile {
+                padding-top: 35px;
+            }
+
+            .profile-picture {
+                width: 105px;
+                height: 105px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- PROFILE -->
+
     <header class="profile">
         <img
             src="FinnPro03.jpg"
@@ -76,5 +202,42 @@
             Check out FinnPro_03
         </a>
     </header>
+
+    <!-- VIDEO ARCHIVE -->
+
+    <main class="archive">
+        <h2>Video Archive</h2>
+
+        <p class="archive-description">
+            Every upload. Every era. The complete FinnPro_03 history.
+        </p>
+
+        <div class="video-grid">
+
+            <!-- VIDEO 1 -->
+
+            <article class="video-card">
+                <img
+                    class="thumbnail"
+                    src="https://placehold.co/640x360/252525/ffffff?text=Skibidi+Toilet+1+But+Paper"
+                    alt="Skibidi Toilet 1 But Paper thumbnail"
+                >
+
+                <div class="video-info">
+                    <h3>Skibidi Toilet 1 But Paper</h3>
+
+                    <p class="video-date">
+                        December 19, 2023
+                    </p>
+
+                    <span class="video-status">
+                        HISTORICAL VIDEO
+                    </span>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
 </body>
 </html>
